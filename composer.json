@@ -1,0 +1,25 @@
+{
+    "name": "redsky/view",
+    "description": "RedSky View Component Library",
+    "type": "library",
+    "license": "proprietary",
+
+    "require": {
+        "php": ">=8.1"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "RedSky\\View\\": "src/"
+        }
+    },
+
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
