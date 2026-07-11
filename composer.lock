@@ -4,12 +4,50 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f7d45ceda0af7858fc8566b0d8eb143",
-    "packages": [],
+    "content-hash": "4dc36072ed06995e9b17569e3bb9c107",
+    "packages": [
+        {
+            "name": "redsky/framework",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../redsky-framework",
+                "reference": "0c86dc7eb2738b34125b7165030f642141d67e39"
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "RedSky\\Framework\\": "src/"
+                },
+                "files": [
+                    "src/Support/helpers.php"
+                ]
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Julio Cesar Acosta Anzures",
+                    "email": "julioacostaanzures@gmail.com"
+                }
+            ],
+            "description": "Laravel-style Lightweight PHP framework",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        }
+    ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": {
+        "redsky/framework": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

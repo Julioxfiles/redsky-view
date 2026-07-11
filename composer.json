@@ -5,13 +5,27 @@
   "license": "proprietary",
 
   "require": {
-    "php": ">=8.1"
+    "php": ">=8.1",
+    "redsky/framework": "dev-main"
   },
+
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../redsky-framework",
+      "options": {
+        "symlink": true
+      }
+    }
+  ],
 
   "autoload": {
     "psr-4": {
       "RedSky\\View\\": "src/"
-    }
+    },
+    "files": [
+      "src/Support/helpers.php"
+    ]
   },
 
   "autoload-dev": {
