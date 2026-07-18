@@ -9,6 +9,7 @@ class ViewManager
         'layout' => null,
     ];
 
+
     /**
      * Configure the view manager.
      */
@@ -20,6 +21,7 @@ class ViewManager
         );
     }
 
+
     /**
      * Get views path.
      */
@@ -27,6 +29,7 @@ class ViewManager
     {
         return self::$config['path'];
     }
+
 
     /**
      * Get default layout.
@@ -36,11 +39,21 @@ class ViewManager
         return self::$config['layout'];
     }
 
+
     /**
      * Get all configuration.
      */
     public static function all(): array
     {
         return self::$config;
+    }
+
+
+    /**
+     * Create a view builder.
+     */
+    public static function make(string $view): ViewBuilder
+    {
+        return new ViewBuilder($view);
     }
 }

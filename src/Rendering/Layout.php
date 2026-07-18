@@ -7,11 +7,15 @@ use RedSky\View\ViewManager;
 class Layout
 {
     /**
-     * Apply the configured layout.
+     * Render content inside a layout.
      */
-    public function wrap(string $content): string
-    {
-        $layout = ViewManager::layout();
+    public function wrap(
+        string $content,
+        ?string $layout = null,
+        array $data = []
+    ): string {
+        $layout = $layout
+            ?? ViewManager::layout();
 
         if (! $layout) {
             return $content;
@@ -23,7 +27,14 @@ class Layout
 
         $file = $finder->find($layout);
 
+        $data['content'] = $content;
+
         ob_start();
+
+        extract(
+            $data,
+            EXTR_SKIP
+        );
 
         include $file;
 
