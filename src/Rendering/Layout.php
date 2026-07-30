@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace RedSky\View\Rendering;
 
-use RedSky\View\ViewManager;
+use RedSky\View\Foundation\ViewManager;
 
 class Layout
 {
@@ -14,6 +16,7 @@ class Layout
         ?string $layout = null,
         array $data = []
     ): string {
+
         $layout = $layout
             ?? ViewManager::layout();
 
@@ -25,7 +28,9 @@ class Layout
             ViewManager::path()
         );
 
-        $file = $finder->find($layout);
+        $file = $finder->find(
+            $layout
+        );
 
         $data['content'] = $content;
 
@@ -40,4 +45,32 @@ class Layout
 
         return ob_get_clean();
     }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Responsabilidad de esta clase
+    |--------------------------------------------------------------------------
+    |
+    | Esta clase envuelve el contenido generado por una vista dentro
+    | de un layout.
+    |
+    | Sus responsabilidades son:
+    |
+    | - Recibir contenido HTML.
+    | - Localizar el archivo del layout.
+    | - Inyectar el contenido dentro del layout.
+    | - Generar el HTML final.
+    |
+    | Esta clase NO debe:
+    |
+    | - Elegir qué layout utilizar.
+    | - Resolver componentes UI.
+    | - Seleccionar una biblioteca visual.
+    | - Administrar assets o temas.
+    | - Tomar decisiones de negocio.
+    |
+    | Su única responsabilidad es aplicar un layout al contenido recibido.
+    |
+    */
 }

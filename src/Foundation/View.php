@@ -1,14 +1,18 @@
 <?php
 
-namespace RedSky\View;
+declare(strict_types=1);
+
+namespace RedSky\View\Foundation;
 
 use RedSky\View\Rendering\Finder;
 use RedSky\View\Rendering\Renderer;
+use RedSky\View\Foundation\ViewBuilder;
+use RedSky\View\Foundation\ViewManager;
 
 class View
 {
     /**
-     * Create a view instance.
+     * Render a view.
      */
     public static function make(
         string $view,
@@ -20,6 +24,7 @@ class View
         array $styles = [],
         ?string $title = null
     ): string {
+
         $finder = new Finder(
             ViewManager::path()
         );
@@ -31,12 +36,12 @@ class View
         return $renderer->render(
             $file,
             [
-                'viewData' => $data,
-                'layout' => $layout,
+                'viewData'   => $data,
+                'layout'     => $layout,
                 'layoutData' => $layoutData,
-                'scripts' => $scripts,
-                'styles' => $styles,
-                'title' => $title,
+                'scripts'    => $scripts,
+                'styles'     => $styles,
+                'title'      => $title,
             ],
             $applyLayout
         );
@@ -44,10 +49,12 @@ class View
 
 
     /**
-     * Render from a ViewBuilder instance.
+     * Render a ViewBuilder instance.
      */
-    public static function renderBuilder(ViewBuilder $builder): string
-    {
+    public static function renderBuilder(
+        ViewBuilder $builder
+    ): string {
+
         return self::make(
             $builder->view(),
             $builder->data(),

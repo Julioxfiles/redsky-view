@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-namespace RedSky\View;
+namespace RedSky\View\Foundation;
 
 class ViewBuilder
 {
@@ -27,14 +28,22 @@ class ViewBuilder
     }
 
 
-    public function with(string $key, mixed $value): self
-    {
+    /**
+     * Add a single data value.
+     */
+    public function with(
+        string $key,
+        mixed $value
+    ): self {
         $this->data[$key] = $value;
 
         return $this;
     }
 
 
+    /**
+     * Add multiple data values.
+     */
     public function withData(array $data): self
     {
         $this->data = array_merge(
@@ -46,6 +55,12 @@ class ViewBuilder
     }
 
 
+    /**
+     * Define an explicit layout.
+     *
+     * This allows a developer to override
+     * the layout selected by redsky-ui.
+     */
     public function layout(string $layout): self
     {
         $this->layout = $layout;
@@ -54,6 +69,9 @@ class ViewBuilder
     }
 
 
+    /**
+     * Add data available only for the layout.
+     */
     public function layoutData(array $data): self
     {
         $this->layoutData = array_merge(
@@ -65,6 +83,9 @@ class ViewBuilder
     }
 
 
+    /**
+     * Define page title.
+     */
     public function title(string $title): self
     {
         $this->title = $title;
@@ -73,8 +94,12 @@ class ViewBuilder
     }
 
 
-    public function scripts(array|string $scripts): self
-    {
+    /**
+     * Add javascript files.
+     */
+    public function scripts(
+        array|string $scripts
+    ): self {
         $scripts = is_array($scripts)
             ? $scripts
             : [$scripts];
@@ -88,8 +113,12 @@ class ViewBuilder
     }
 
 
-    public function styles(array|string $styles): self
-    {
+    /**
+     * Add stylesheet files.
+     */
+    public function styles(
+        array|string $styles
+    ): self {
         $styles = is_array($styles)
             ? $styles
             : [$styles];
@@ -103,6 +132,9 @@ class ViewBuilder
     }
 
 
+    /**
+     * Disable layout rendering.
+     */
     public function withoutLayout(): self
     {
         $this->applyLayout = false;
@@ -160,13 +192,42 @@ class ViewBuilder
 
 
     /**
-     * Render automatically when used as string.
+     * Allow automatic rendering when converted to string.
      */
-    
     public function __toString(): string
     {
         return View::renderBuilder($this);
     }
-        
 
+
+/*
+|--------------------------------------------------------------------------
+| Responsabilidad de esta clase
+|--------------------------------------------------------------------------
+|
+| Esta clase representa la definición de una vista antes de ser renderizada.
+|
+| Su responsabilidad es:
+|
+| - Mantener el nombre de la vista.
+| - Almacenar los datos enviados a la vista.
+| - Almacenar información opcional como:
+|      - layout
+|      - título
+|      - scripts
+|      - estilos
+|      - datos del layout
+|
+| Esta clase NO debe:
+|
+| - Renderizar la vista.
+| - Buscar archivos físicos.
+| - Resolver componentes UI.
+| - Decidir qué biblioteca visual utilizar.
+|
+| Solamente representa la definición de una vista que posteriormente será
+| renderizada por el motor de vistas.
+|
+*/
+  
 }
